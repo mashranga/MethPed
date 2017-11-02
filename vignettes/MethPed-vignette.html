@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title></title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<link href="data:text/css;charset=utf-8,pre%20%2Eoperator%2C%0Apre%20%2Eparen%20%7B%0Acolor%3A%20rgb%28104%2C%20118%2C%20135%29%0A%7D%0Apre%20%2Eliteral%20%7B%0Acolor%3A%20%23990073%0A%7D%0Apre%20%2Enumber%20%7B%0Acolor%3A%20%23099%3B%0A%7D%0Apre%20%2Ecomment%20%7B%0Acolor%3A%20%23998%3B%0Afont%2Dstyle%3A%20italic%0A%7D%0Apre%20%2Ekeyword%20%7B%0Acolor%3A%20%23900%3B%0Afont%2Dweight%3A%20bold%0A%7D%0Apre%20%2Eidentifier%20%7B%0Acolor%3A%20rgb%280%2C%200%2C%200%29%3B%0A%7D%0Apre%20%2Estring%20%7B%0Acolor%3A%20%23d14%3B%0A%7D%0A" rel="stylesheet" type="text/css" />
+<script src="data:application/x-javascript;base64,CnZhciBobGpzPW5ldyBmdW5jdGlvbigpe2Z1bmN0aW9uIG0ocCl7cmV0dXJuIHAucmVwbGFjZSgvJi9nbSwiJmFtcDsiKS5yZXBsYWNlKC88L2dtLCImbHQ7Iil9ZnVuY3Rpb24gZihyLHEscCl7cmV0dXJuIFJlZ0V4cChxLCJtIisoci5jST8iaSI6IiIpKyhwPyJnIjoiIikpfWZ1bmN0aW9uIGIocil7Zm9yKHZhciBwPTA7cDxyLmNoaWxkTm9kZXMubGVuZ3RoO3ArKyl7dmFyIHE9ci5jaGlsZE5vZGVzW3BdO2lmKHEubm9kZU5hbWU9PSJDT0RFIil7cmV0dXJuIHF9aWYoIShxLm5vZGVUeXBlPT0zJiZxLm5vZGVWYWx1ZS5tYXRjaCgvXHMrLykpKXticmVha319fWZ1bmN0aW9uIGgodCxzKXt2YXIgcD0iIjtmb3IodmFyIHI9MDtyPHQuY2hpbGROb2Rlcy5sZW5ndGg7cisrKXtpZih0LmNoaWxkTm9kZXNbcl0ubm9kZVR5cGU9PTMpe3ZhciBxPXQuY2hpbGROb2Rlc1tyXS5ub2RlVmFsdWU7aWYocyl7cT1xLnJlcGxhY2UoL1xuL2csIiIpfXArPXF9ZWxzZXtpZih0LmNoaWxkTm9kZXNbcl0ubm9kZU5hbWU9PSJCUiIpe3ArPSJcbiJ9ZWxzZXtwKz1oKHQuY2hpbGROb2Rlc1tyXSl9fX1pZigvTVNJRSBbNjc4XS8udGVzdChuYXZpZ2F0b3IudXNlckFnZW50KSl7cD1wLnJlcGxhY2UoL1xyL2csIlxuIil9cmV0dXJuIHB9ZnVuY3Rpb24gYShzKXt2YXIgcj1zLmNsYXNzTmFtZS5zcGxpdCgvXHMrLyk7cj1yLmNvbmNhdChzLnBhcmVudE5vZGUuY2xhc3NOYW1lLnNwbGl0KC9ccysvKSk7Zm9yKHZhciBxPTA7cTxyLmxlbmd0aDtxKyspe3ZhciBwPXJbcV0ucmVwbGFjZSgvXmxhbmd1YWdlLS8sIiIpO2lmKGVbcF0pe3JldHVybiBwfX19ZnVuY3Rpb24gYyhxKXt2YXIgcD1bXTsoZnVuY3Rpb24ocyx0KXtmb3IodmFyIHI9MDtyPHMuY2hpbGROb2Rlcy5sZW5ndGg7cisrKXtpZihzLmNoaWxkTm9kZXNbcl0ubm9kZVR5cGU9PTMpe3QrPXMuY2hpbGROb2Rlc1tyXS5ub2RlVmFsdWUubGVuZ3RofWVsc2V7aWYocy5jaGlsZE5vZGVzW3JdLm5vZGVOYW1lPT0iQlIiKXt0Kz0xfWVsc2V7aWYocy5jaGlsZE5vZGVzW3JdLm5vZGVUeXBlPT0xKXtwLnB1c2goe2V2ZW50OiJzdGFydCIsb2Zmc2V0OnQsbm9kZTpzLmNoaWxkTm9kZXNbcl19KTt0PWFyZ3VtZW50cy5jYWxsZWUocy5jaGlsZE5vZGVzW3JdLHQpO3AucHVzaCh7ZXZlbnQ6InN0b3AiLG9mZnNldDp0LG5vZGU6cy5jaGlsZE5vZGVzW3JdfSl9fX19cmV0dXJuIHR9KShxLDApO3JldHVybiBwfWZ1bmN0aW9uIGsoeSx3LHgpe3ZhciBxPTA7dmFyIHo9IiI7dmFyIHM9W107ZnVuY3Rpb24gdSgpe2lmKHkubGVuZ3RoJiZ3Lmxlbmd0aCl7aWYoeVswXS5vZmZzZXQhPXdbMF0ub2Zmc2V0KXtyZXR1cm4oeVswXS5vZmZzZXQ8d1swXS5vZmZzZXQpP3k6d31lbHNle3JldHVybiB3WzBdLmV2ZW50PT0ic3RhcnQiP3k6d319ZWxzZXtyZXR1cm4geS5sZW5ndGg/eTp3fX1mdW5jdGlvbiB0KEQpe3ZhciBBPSI8IitELm5vZGVOYW1lLnRvTG93ZXJDYXNlKCk7Zm9yKHZhciBCPTA7QjxELmF0dHJpYnV0ZXMubGVuZ3RoO0IrKyl7dmFyIEM9RC5hdHRyaWJ1dGVzW0JdO0ErPSIgIitDLm5vZGVOYW1lLnRvTG93ZXJDYXNlKCk7aWYoQy52YWx1ZSE9PXVuZGVmaW5lZCYmQy52YWx1ZSE9PWZhbHNlJiZDLnZhbHVlIT09bnVsbCl7QSs9Jz0iJyttKEMudmFsdWUpKyciJ319cmV0dXJuIEErIj4ifXdoaWxlKHkubGVuZ3RofHx3Lmxlbmd0aCl7dmFyIHY9dSgpLnNwbGljZSgwLDEpWzBdO3orPW0oeC5zdWJzdHIocSx2Lm9mZnNldC1xKSk7cT12Lm9mZnNldDtpZih2LmV2ZW50PT0ic3RhcnQiKXt6Kz10KHYubm9kZSk7cy5wdXNoKHYubm9kZSl9ZWxzZXtpZih2LmV2ZW50PT0ic3RvcCIpe3ZhciBwLHI9cy5sZW5ndGg7ZG97ci0tO3A9c1tyXTt6Kz0oIjwvIitwLm5vZGVOYW1lLnRvTG93ZXJDYXNlKCkrIj4iKX13aGlsZShwIT12Lm5vZGUpO3Muc3BsaWNlKHIsMSk7d2hpbGUocjxzLmxlbmd0aCl7eis9dChzW3JdKTtyKyt9fX19cmV0dXJuIHorbSh4LnN1YnN0cihxKSl9ZnVuY3Rpb24gaigpe2Z1bmN0aW9uIHEoeCx5LHYpe2lmKHguY29tcGlsZWQpe3JldHVybn12YXIgdTt2YXIgcz1bXTtpZih4Lmspe3gubFI9Zih5LHgubHx8aGxqcy5JUix0cnVlKTtmb3IodmFyIHcgaW4geC5rKXtpZigheC5rLmhhc093blByb3BlcnR5KHcpKXtjb250aW51ZX1pZih4Lmtbd10gaW5zdGFuY2VvZiBPYmplY3Qpe3U9eC5rW3ddfWVsc2V7dT14Lms7dz0ia2V5d29yZCJ9Zm9yKHZhciByIGluIHUpe2lmKCF1Lmhhc093blByb3BlcnR5KHIpKXtjb250aW51ZX14Lmtbcl09W3csdVtyXV07cy5wdXNoKHIpfX19aWYoIXYpe2lmKHguYldLKXt4LmI9IlxcYigiK3Muam9pbigifCIpKyIpXFxzIn14LmJSPWYoeSx4LmI/eC5iOiJcXEJ8XFxiIik7aWYoIXguZSYmIXguZVcpe3guZT0iXFxCfFxcYiJ9aWYoeC5lKXt4LmVSPWYoeSx4LmUpfX1pZih4Lmkpe3guaVI9Zih5LHguaSl9aWYoeC5yPT09dW5kZWZpbmVkKXt4LnI9MX1pZigheC5jKXt4LmM9W119eC5jb21waWxlZD10cnVlO2Zvcih2YXIgdD0wO3Q8eC5jLmxlbmd0aDt0Kyspe2lmKHguY1t0XT09InNlbGYiKXt4LmNbdF09eH1xKHguY1t0XSx5LGZhbHNlKX1pZih4LnN0YXJ0cyl7cSh4LnN0YXJ0cyx5LGZhbHNlKX19Zm9yKHZhciBwIGluIGUpe2lmKCFlLmhhc093blByb3BlcnR5KHApKXtjb250aW51ZX1xKGVbcF0uZE0sZVtwXSx0cnVlKX19ZnVuY3Rpb24gZChCLEMpe2lmKCFqLmNhbGxlZCl7aigpO2ouY2FsbGVkPXRydWV9ZnVuY3Rpb24gcShyLE0pe2Zvcih2YXIgTD0wO0w8TS5jLmxlbmd0aDtMKyspe2lmKChNLmNbTF0uYlIuZXhlYyhyKXx8W251bGxdKVswXT09cil7cmV0dXJuIE0uY1tMXX19fWZ1bmN0aW9uIHYoTCxyKXtpZihEW0xdLmUmJkRbTF0uZVIudGVzdChyKSl7cmV0dXJuIDF9aWYoRFtMXS5lVyl7dmFyIE09dihMLTEscik7cmV0dXJuIE0/TSsxOjB9cmV0dXJuIDB9ZnVuY3Rpb24gdyhyLEwpe3JldHVybiBMLmkmJkwuaVIudGVzdChyKX1mdW5jdGlvbiBLKE4sTyl7dmFyIE09W107Zm9yKHZhciBMPTA7TDxOLmMubGVuZ3RoO0wrKyl7TS5wdXNoKE4uY1tMXS5iKX12YXIgcj1ELmxlbmd0aC0xO2Rve2lmKERbcl0uZSl7TS5wdXNoKERbcl0uZSl9ci0tfXdoaWxlKERbcisxXS5lVyk7aWYoTi5pKXtNLnB1c2goTi5pKX1yZXR1cm4gZihPLE0uam9pbigifCIpLHRydWUpfWZ1bmN0aW9uIHAoTSxMKXt2YXIgTj1EW0QubGVuZ3RoLTFdO2lmKCFOLnQpe04udD1LKE4sRSl9Ti50Lmxhc3RJbmRleD1MO3ZhciByPU4udC5leGVjKE0pO3JldHVybiByP1tNLnN1YnN0cihMLHIuaW5kZXgtTCksclswXSxmYWxzZV06W00uc3Vic3RyKEwpLCIiLHRydWVdfWZ1bmN0aW9uIHooTixyKXt2YXIgTD1FLmNJP3JbMF0udG9Mb3dlckNhc2UoKTpyWzBdO3ZhciBNPU4ua1tMXTtpZihNJiZNIGluc3RhbmNlb2YgQXJyYXkpe3JldHVybiBNfXJldHVybiBmYWxzZX1mdW5jdGlvbiBGKEwsUCl7TD1tKEwpO2lmKCFQLmspe3JldHVybiBMfXZhciByPSIiO3ZhciBPPTA7UC5sUi5sYXN0SW5kZXg9MDt2YXIgTT1QLmxSLmV4ZWMoTCk7d2hpbGUoTSl7cis9TC5zdWJzdHIoTyxNLmluZGV4LU8pO3ZhciBOPXooUCxNKTtpZihOKXt4Kz1OWzFdO3IrPSc8c3BhbiBjbGFzcz0iJytOWzBdKyciPicrTVswXSsiPC9zcGFuPiJ9ZWxzZXtyKz1NWzBdfU89UC5sUi5sYXN0SW5kZXg7TT1QLmxSLmV4ZWMoTCl9cmV0dXJuIHIrTC5zdWJzdHIoTyxMLmxlbmd0aC1PKX1mdW5jdGlvbiBKKEwsTSl7aWYoTS5zTCYmZVtNLnNMXSl7dmFyIHI9ZChNLnNMLEwpO3grPXIua2V5d29yZF9jb3VudDtyZXR1cm4gci52YWx1ZX1lbHNle3JldHVybiBGKEwsTSl9fWZ1bmN0aW9uIEkoTSxyKXt2YXIgTD1NLmNOPyc8c3BhbiBjbGFzcz0iJytNLmNOKyciPic6IiI7aWYoTS5yQil7eSs9TDtNLmJ1ZmZlcj0iIn1lbHNle2lmKE0uZUIpe3krPW0ocikrTDtNLmJ1ZmZlcj0iIn1lbHNle3krPUw7TS5idWZmZXI9cn19RC5wdXNoKE0pO0ErPU0ucn1mdW5jdGlvbiBHKE4sTSxRKXt2YXIgUj1EW0QubGVuZ3RoLTFdO2lmKFEpe3krPUooUi5idWZmZXIrTixSKTtyZXR1cm4gZmFsc2V9dmFyIFA9cShNLFIpO2lmKFApe3krPUooUi5idWZmZXIrTixSKTtJKFAsTSk7cmV0dXJuIFAuckJ9dmFyIEw9dihELmxlbmd0aC0xLE0pO2lmKEwpe3ZhciBPPVIuY04/Ijwvc3Bhbj4iOiIiO2lmKFIuckUpe3krPUooUi5idWZmZXIrTixSKStPfWVsc2V7aWYoUi5lRSl7eSs9SihSLmJ1ZmZlcitOLFIpK08rbShNKX1lbHNle3krPUooUi5idWZmZXIrTitNLFIpK099fXdoaWxlKEw+MSl7Tz1EW0QubGVuZ3RoLTJdLmNOPyI8L3NwYW4+IjoiIjt5Kz1PO0wtLTtELmxlbmd0aC0tfXZhciByPURbRC5sZW5ndGgtMV07RC5sZW5ndGgtLTtEW0QubGVuZ3RoLTFdLmJ1ZmZlcj0iIjtpZihyLnN0YXJ0cyl7SShyLnN0YXJ0cywiIil9cmV0dXJuIFIuckV9aWYodyhNLFIpKXt0aHJvdyJJbGxlZ2FsIn19dmFyIEU9ZVtCXTt2YXIgRD1bRS5kTV07dmFyIEE9MDt2YXIgeD0wO3ZhciB5PSIiO3RyeXt2YXIgcyx1PTA7RS5kTS5idWZmZXI9IiI7ZG97cz1wKEMsdSk7dmFyIHQ9RyhzWzBdLHNbMV0sc1syXSk7dSs9c1swXS5sZW5ndGg7aWYoIXQpe3UrPXNbMV0ubGVuZ3RofX13aGlsZSghc1syXSk7aWYoRC5sZW5ndGg+MSl7dGhyb3ciSWxsZWdhbCJ9cmV0dXJue3I6QSxrZXl3b3JkX2NvdW50OngsdmFsdWU6eX19Y2F0Y2goSCl7aWYoSD09IklsbGVnYWwiKXtyZXR1cm57cjowLGtleXdvcmRfY291bnQ6MCx2YWx1ZTptKEMpfX1lbHNle3Rocm93IEh9fX1mdW5jdGlvbiBnKHQpe3ZhciBwPXtrZXl3b3JkX2NvdW50OjAscjowLHZhbHVlOm0odCl9O3ZhciByPXA7Zm9yKHZhciBxIGluIGUpe2lmKCFlLmhhc093blByb3BlcnR5KHEpKXtjb250aW51ZX12YXIgcz1kKHEsdCk7cy5sYW5ndWFnZT1xO2lmKHMua2V5d29yZF9jb3VudCtzLnI+ci5rZXl3b3JkX2NvdW50K3Iucil7cj1zfWlmKHMua2V5d29yZF9jb3VudCtzLnI+cC5rZXl3b3JkX2NvdW50K3Aucil7cj1wO3A9c319aWYoci5sYW5ndWFnZSl7cC5zZWNvbmRfYmVzdD1yfXJldHVybiBwfWZ1bmN0aW9uIGkocixxLHApe2lmKHEpe3I9ci5yZXBsYWNlKC9eKCg8W14+XSs+fFx0KSspL2dtLGZ1bmN0aW9uKHQsdyx2LHUpe3JldHVybiB3LnJlcGxhY2UoL1x0L2cscSl9KX1pZihwKXtyPXIucmVwbGFjZSgvXG4vZywiPGJyPiIpfXJldHVybiByfWZ1bmN0aW9uIG4odCx3LHIpe3ZhciB4PWgodCxyKTt2YXIgdj1hKHQpO3ZhciB5LHM7aWYodil7eT1kKHYseCl9ZWxzZXtyZXR1cm59dmFyIHE9Yyh0KTtpZihxLmxlbmd0aCl7cz1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJwcmUiKTtzLmlubmVySFRNTD15LnZhbHVlO3kudmFsdWU9ayhxLGMocykseCl9eS52YWx1ZT1pKHkudmFsdWUsdyxyKTt2YXIgdT10LmNsYXNzTmFtZTtpZighdS5tYXRjaCgiKFxcc3xeKShsYW5ndWFnZS0pPyIrdisiKFxcc3wkKSIpKXt1PXU/KHUrIiAiK3YpOnZ9aWYoL01TSUUgWzY3OF0vLnRlc3QobmF2aWdhdG9yLnVzZXJBZ2VudCkmJnQudGFnTmFtZT09IkNPREUiJiZ0LnBhcmVudE5vZGUudGFnTmFtZT09IlBSRSIpe3M9dC5wYXJlbnROb2RlO3ZhciBwPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpO3AuaW5uZXJIVE1MPSI8cHJlPjxjb2RlPiIreS52YWx1ZSsiPC9jb2RlPjwvcHJlPiI7dD1wLmZpcnN0Q2hpbGQuZmlyc3RDaGlsZDtwLmZpcnN0Q2hpbGQuY049cy5jTjtzLnBhcmVudE5vZGUucmVwbGFjZUNoaWxkKHAuZmlyc3RDaGlsZCxzKX1lbHNle3QuaW5uZXJIVE1MPXkudmFsdWV9dC5jbGFzc05hbWU9dTt0LnJlc3VsdD17bGFuZ3VhZ2U6dixrdzp5LmtleXdvcmRfY291bnQscmU6eS5yfTtpZih5LnNlY29uZF9iZXN0KXt0LnNlY29uZF9iZXN0PXtsYW5ndWFnZTp5LnNlY29uZF9iZXN0Lmxhbmd1YWdlLGt3Onkuc2Vjb25kX2Jlc3Qua2V5d29yZF9jb3VudCxyZTp5LnNlY29uZF9iZXN0LnJ9fX1mdW5jdGlvbiBvKCl7aWYoby5jYWxsZWQpe3JldHVybn1vLmNhbGxlZD10cnVlO3ZhciByPWRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJwcmUiKTtmb3IodmFyIHA9MDtwPHIubGVuZ3RoO3ArKyl7dmFyIHE9YihyW3BdKTtpZihxKXtuKHEsaGxqcy50YWJSZXBsYWNlKX19fWZ1bmN0aW9uIGwoKXtpZih3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcil7d2luZG93LmFkZEV2ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLG8sZmFsc2UpO3dpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJsb2FkIixvLGZhbHNlKX1lbHNle2lmKHdpbmRvdy5hdHRhY2hFdmVudCl7d2luZG93LmF0dGFjaEV2ZW50KCJvbmxvYWQiLG8pfWVsc2V7d2luZG93Lm9ubG9hZD1vfX19dmFyIGU9e307dGhpcy5MQU5HVUFHRVM9ZTt0aGlzLmhpZ2hsaWdodD1kO3RoaXMuaGlnaGxpZ2h0QXV0bz1nO3RoaXMuZml4TWFya3VwPWk7dGhpcy5oaWdobGlnaHRCbG9jaz1uO3RoaXMuaW5pdEhpZ2hsaWdodGluZz1vO3RoaXMuaW5pdEhpZ2hsaWdodGluZ09uTG9hZD1sO3RoaXMuSVI9IlthLXpBLVpdW2EtekEtWjAtOV9dKiI7dGhpcy5VSVI9IlthLXpBLVpfXVthLXpBLVowLTlfXSoiO3RoaXMuTlI9IlxcYlxcZCsoXFwuXFxkKyk/Ijt0aGlzLkNOUj0iXFxiKDBbeFhdW2EtZkEtRjAtOV0rfChcXGQrKFxcLlxcZCopP3xcXC5cXGQrKShbZUVdWy0rXT9cXGQrKT8pIjt0aGlzLkJOUj0iXFxiKDBiWzAxXSspIjt0aGlzLlJTUj0iIXwhPXwhPT18JXwlPXwmfCYmfCY9fFxcKnxcXCo9fFxcK3xcXCs9fCx8XFwufC18LT18L3wvPXw6fDt8PHw8PHw8PD18PD18PXw9PXw9PT18Pnw+PXw+Pnw+Pj18Pj4+fD4+Pj18XFw/fFxcW3xcXHt8XFwofFxcXnxcXF49fFxcfHxcXHw9fFxcfFxcfHx+Ijt0aGlzLkVSPSIoPyFbXFxzXFxTXSkiO3RoaXMuQkU9e2I6IlxcXFwuIixyOjB9O3RoaXMuQVNNPXtjTjoic3RyaW5nIixiOiInIixlOiInIixpOiJcXG4iLGM6W3RoaXMuQkVdLHI6MH07dGhpcy5RU009e2NOOiJzdHJpbmciLGI6JyInLGU6JyInLGk6IlxcbiIsYzpbdGhpcy5CRV0scjowfTt0aGlzLkNMQ009e2NOOiJjb21tZW50IixiOiIvLyIsZToiJCJ9O3RoaXMuQ0JMQ0xNPXtjTjoiY29tbWVudCIsYjoiL1xcKiIsZToiXFwqLyJ9O3RoaXMuSENNPXtjTjoiY29tbWVudCIsYjoiIyIsZToiJCJ9O3RoaXMuTk09e2NOOiJudW1iZXIiLGI6dGhpcy5OUixyOjB9O3RoaXMuQ05NPXtjTjoibnVtYmVyIixiOnRoaXMuQ05SLHI6MH07dGhpcy5CTk09e2NOOiJudW1iZXIiLGI6dGhpcy5CTlIscjowfTt0aGlzLmluaGVyaXQ9ZnVuY3Rpb24ocixzKXt2YXIgcD17fTtmb3IodmFyIHEgaW4gcil7cFtxXT1yW3FdfWlmKHMpe2Zvcih2YXIgcSBpbiBzKXtwW3FdPXNbcV19fXJldHVybiBwfX0oKTtobGpzLkxBTkdVQUdFUy5jcHA9ZnVuY3Rpb24oKXt2YXIgYT17a2V5d29yZDp7ImZhbHNlIjoxLCJpbnQiOjEsImZsb2F0IjoxLCJ3aGlsZSI6MSwicHJpdmF0ZSI6MSwiY2hhciI6MSwiY2F0Y2giOjEsImV4cG9ydCI6MSx2aXJ0dWFsOjEsb3BlcmF0b3I6MixzaXplb2Y6MixkeW5hbWljX2Nhc3Q6Mix0eXBlZGVmOjIsY29uc3RfY2FzdDoyLCJjb25zdCI6MSxzdHJ1Y3Q6MSwiZm9yIjoxLHN0YXRpY19jYXN0OjIsdW5pb246MSxuYW1lc3BhY2U6MSx1bnNpZ25lZDoxLCJsb25nIjoxLCJ0aHJvdyI6MSwidm9sYXRpbGUiOjIsInN0YXRpYyI6MSwicHJvdGVjdGVkIjoxLGJvb2w6MSx0ZW1wbGF0ZToxLG11dGFibGU6MSwiaWYiOjEsInB1YmxpYyI6MSxmcmllbmQ6MiwiZG8iOjEsInJldHVybiI6MSwiZ290byI6MSxhdXRvOjEsInZvaWQiOjIsImVudW0iOjEsImVsc2UiOjEsImJyZWFrIjoxLCJuZXciOjEsZXh0ZXJuOjEsdXNpbmc6MSwidHJ1ZSI6MSwiY2xhc3MiOjEsYXNtOjEsImNhc2UiOjEsdHlwZWlkOjEsInNob3J0IjoxLHJlaW50ZXJwcmV0X2Nhc3Q6MiwiZGVmYXVsdCI6MSwiZG91YmxlIjoxLHJlZ2lzdGVyOjEsZXhwbGljaXQ6MSxzaWduZWQ6MSx0eXBlbmFtZToxLCJ0cnkiOjEsInRoaXMiOjEsInN3aXRjaCI6MSwiY29udGludWUiOjEsd2NoYXJfdDoxLGlubGluZToxLCJkZWxldGUiOjEsYWxpZ25vZjoxLGNoYXIxNl90OjEsY2hhcjMyX3Q6MSxjb25zdGV4cHI6MSxkZWNsdHlwZToxLG5vZXhjZXB0OjEsbnVsbHB0cjoxLHN0YXRpY19hc3NlcnQ6MSx0aHJlYWRfbG9jYWw6MSxyZXN0cmljdDoxLF9Cb29sOjEsY29tcGxleDoxfSxidWlsdF9pbjp7c3RkOjEsc3RyaW5nOjEsY2luOjEsY291dDoxLGNlcnI6MSxjbG9nOjEsc3RyaW5nc3RyZWFtOjEsaXN0cmluZ3N0cmVhbToxLG9zdHJpbmdzdHJlYW06MSxhdXRvX3B0cjoxLGRlcXVlOjEsbGlzdDoxLHF1ZXVlOjEsc3RhY2s6MSx2ZWN0b3I6MSxtYXA6MSxzZXQ6MSxiaXRzZXQ6MSxtdWx0aXNldDoxLG11bHRpbWFwOjEsdW5vcmRlcmVkX3NldDoxLHVub3JkZXJlZF9tYXA6MSx1bm9yZGVyZWRfbXVsdGlzZXQ6MSx1bm9yZGVyZWRfbXVsdGltYXA6MSxhcnJheToxLHNoYXJlZF9wdHI6MX19O3JldHVybntkTTp7azphLGk6IjwvIixjOltobGpzLkNMQ00saGxqcy5DQkxDTE0saGxqcy5RU00se2NOOiJzdHJpbmciLGI6IidcXFxcPy4iLGU6IiciLGk6Ii4ifSx7Y046Im51bWJlciIsYjoiXFxiKFxcZCsoXFwuXFxkKik/fFxcLlxcZCspKHV8VXxsfEx8dWx8VUx8ZnxGKSJ9LGhsanMuQ05NLHtjTjoicHJlcHJvY2Vzc29yIixiOiIjIixlOiIkIn0se2NOOiJzdGxfY29udGFpbmVyIixiOiJcXGIoZGVxdWV8bGlzdHxxdWV1ZXxzdGFja3x2ZWN0b3J8bWFwfHNldHxiaXRzZXR8bXVsdGlzZXR8bXVsdGltYXB8dW5vcmRlcmVkX21hcHx1bm9yZGVyZWRfc2V0fHVub3JkZXJlZF9tdWx0aXNldHx1bm9yZGVyZWRfbXVsdGltYXB8YXJyYXkpXFxzKjwiLGU6Ij4iLGs6YSxyOjEwLGM6WyJzZWxmIl19XX19fSgpO2hsanMuTEFOR1VBR0VTLnI9e2RNOntjOltobGpzLkhDTSx7Y046Im51bWJlciIsYjoiXFxiMFt4WF1bMC05YS1mQS1GXStbTGldP1xcYiIsZTpobGpzLklNTUVESUFURV9SRSxyOjB9LHtjTjoibnVtYmVyIixiOiJcXGJcXGQrKD86W2VFXVsrXFwtXT9cXGQqKT9MXFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MH0se2NOOiJudW1iZXIiLGI6IlxcYlxcZCtcXC4oPyFcXGQpKD86aVxcYik/IixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJudW1iZXIiLGI6IlxcYlxcZCsoPzpcXC5cXGQqKT8oPzpbZUVdWytcXC1dP1xcZCopP2k/XFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MH0se2NOOiJudW1iZXIiLGI6IlxcLlxcZCsoPzpbZUVdWytcXC1dP1xcZCopP2k/XFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJrZXl3b3JkIixiOiIoPzp0cnlDYXRjaHxsaWJyYXJ5fHNldEdlbmVyaWN8c2V0R3JvdXBHZW5lcmljKVxcYiIsZTpobGpzLklNTUVESUFURV9SRSxyOjEwfSx7Y046ImtleXdvcmQiLGI6IlxcLlxcLlxcLiIsZTpobGpzLklNTUVESUFURV9SRSxyOjEwfSx7Y046ImtleXdvcmQiLGI6IlxcLlxcLlxcZCsoPyFbXFx3Ll0pIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MTB9LHtjTjoia2V5d29yZCIsYjoiXFxiKD86ZnVuY3Rpb24pIixlOmhsanMuSU1NRURJQVRFX1JFLHI6Mn0se2NOOiJrZXl3b3JkIixiOiIoPzppZnxpbnxicmVha3xuZXh0fHJlcGVhdHxlbHNlfGZvcnxyZXR1cm58c3dpdGNofHdoaWxlfHRyeXxzdG9wfHdhcm5pbmd8cmVxdWlyZXxhdHRhY2h8ZGV0YWNofHNvdXJjZXxzZXRNZXRob2R8c2V0Q2xhc3MpXFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJsaXRlcmFsIixiOiIoPzpOQXxOQV9pbnRlZ2VyX3xOQV9yZWFsX3xOQV9jaGFyYWN0ZXJffE5BX2NvbXBsZXhfKVxcYiIsZTpobGpzLklNTUVESUFURV9SRSxyOjEwfSx7Y046ImxpdGVyYWwiLGI6Iig/Ok5VTEx8VFJVRXxGQUxTRXxUfEZ8SW5mfE5hTilcXGIiLGU6aGxqcy5JTU1FRElBVEVfUkUscjoxfSx7Y046ImlkZW50aWZpZXIiLGI6IlthLXpBLVouXVthLXpBLVowLTkuX10qXFxiIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MH0se2NOOiJvcGVyYXRvciIsYjoiPFxcLSg/IVxccypcXGQpIixlOmhsanMuSU1NRURJQVRFX1JFLHI6Mn0se2NOOiJvcGVyYXRvciIsYjoiXFwtPnw8XFwtIixlOmhsanMuSU1NRURJQVRFX1JFLHI6MX0se2NOOiJvcGVyYXRvciIsYjoiJSV8fiIsZTpobGpzLklNTUVESUFURV9SRX0se2NOOiJvcGVyYXRvciIsYjoiPj18PD18PT18IT18XFx8XFx8fCYmfD18XFwrfFxcLXxcXCp8L3xcXF58Pnw8fCF8JnxcXHx8XFwkfDoiLGU6aGxqcy5JTU1FRElBVEVfUkUscjowfSx7Y046Im9wZXJhdG9yIixiOiIlIixlOiIlIixpOiJcXG4iLHI6MX0se2NOOiJpZGVudGlmaWVyIixiOiJgIixlOiJgIixyOjB9LHtjTjoic3RyaW5nIixiOiciJyxlOiciJyxjOltobGpzLkJFXSxyOjB9LHtjTjoic3RyaW5nIixiOiInIixlOiInIixjOltobGpzLkJFXSxyOjB9LHtjTjoicGFyZW4iLGI6IltbKHtcXF0pfV0iLGU6aGxqcy5JTU1FRElBVEVfUkUscjowfV19fTsKaGxqcy5pbml0SGlnaGxpZ2h0aW5nT25Mb2FkKCk7Cgo="></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+<link href="data:text/css;charset=utf-8,body%2C%20td%20%7B%0Afont%2Dfamily%3A%20sans%2Dserif%3B%0Abackground%2Dcolor%3A%20white%3B%0Afont%2Dsize%3A%2013px%3B%0A%7D%0Abody%20%7B%0Amax%2Dwidth%3A%20800px%3B%0Amargin%3A%200%20auto%3B%0Apadding%3A%201em%201em%202em%3B%0Aline%2Dheight%3A%2020px%3B%0A%7D%0A%0Adiv%23TOC%20li%20%7B%0Alist%2Dstyle%3Anone%3B%0Abackground%2Dimage%3Anone%3B%0Abackground%2Drepeat%3Anone%3B%0Abackground%2Dposition%3A0%3B%0A%7D%0A%0Ap%2C%20pre%20%7B%20margin%3A%200em%200em%201em%3B%0A%7D%0A%0Aimg%2C%20table%20%7B%0Amargin%3A%200em%20auto%201em%3B%0A%7D%0Ap%20%7B%0Atext%2Dalign%3A%20justify%3B%0A%7D%0Att%2C%20code%2C%20pre%20%7B%0Afont%2Dfamily%3A%20%27DejaVu%20Sans%20Mono%27%2C%20%27Droid%20Sans%20Mono%27%2C%20%27Lucida%20Console%27%2C%20Consolas%2C%20Monaco%2C%20monospace%3B%0A%7D%0Ah1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%20font%2Dfamily%3A%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Amargin%3A%201%2E2em%200em%200%2E6em%200em%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Ah1%2Etitle%20%7B%0Afont%2Dsize%3A%20250%25%3B%0Afont%2Dweight%3A%20normal%3B%0Acolor%3A%20%2387b13f%3B%0Aline%2Dheight%3A%201%2E1em%3B%0Amargin%2Dtop%3A%200px%3B%0Aborder%2Dbottom%3A%200px%3B%0A%7D%0Ah1%20%7B%0Afont%2Dsize%3A%20160%25%3B%0Afont%2Dweight%3A%20normal%3B%0Aline%2Dheight%3A%201%2E4em%3B%0Aborder%2Dbottom%3A%201px%20%231a81c2%20solid%3B%0A%7D%0Ah2%20%7B%0Afont%2Dsize%3A%20130%25%3B%20%7D%0Ah1%2C%20h2%2C%20h3%20%7B%0Acolor%3A%20%231a81c2%3B%0A%7D%0Ah3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Afont%2Dsize%3A115%25%3B%0A%7D%20%0A%0Aa%20%7B%20color%3A%20%231a81c2%3B%20%7D%0Aa%3Aactive%20%7B%20outline%3A%20none%3B%20%7D%0Aa%3Avisited%20%7B%20color%3A%20%231a81c2%3B%20%7D%0Aa%3Ahover%20%7B%20color%3A%20%234c94c2%3B%20%7D%0Apre%2C%20img%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0Adisplay%3A%20block%3B%0A%7D%0Apre%20%7B%0Aborder%3A%200px%20none%3B%0Abackground%2Dcolor%3A%20%23F8F8F8%3B%0Awhite%2Dspace%3A%20pre%3B%0Aoverflow%2Dx%3A%20auto%3B%0A%7D%0Apre%20code%20%7B%0Aborder%3A%201px%20%23aaa%20dashed%3B%0Abackground%2Dcolor%3A%20white%3B%0Adisplay%3A%20block%3B%0Apadding%3A%201em%3B%20color%3A%20%23111%3B%0Aoverflow%2Dx%3A%20inherit%3B%0A%7D%0A%0Apre%20code%5Bclass%5D%20%7B%0Abackground%2Dcolor%3A%20inherit%3B%0A%7D%0A%0Apre%5Bclass%5D%20code%20%7B%0Abackground%2Dcolor%3A%20inherit%3B%0A%7D%0A%0Acode%20%7B%20background%2Dcolor%3A%20transparent%3B%0Acolor%3A%20%2387b13f%3B%0Afont%2Dsize%3A%2092%25%3B%0A%7D%0A%0Atable%2C%20td%2C%20th%20%7B%0Aborder%3A%20none%3B%0Apadding%3A%200%200%2E5em%3B%0A%7D%0A%0Atbody%20tr%3Anth%2Dchild%28odd%29%20td%20%7B%0Abackground%2Dcolor%3A%20%23F8F8F8%3B%0A%7D%0Ablockquote%20%7B%0Acolor%3A%23666666%3B%0Amargin%3A0%3B%0Apadding%2Dleft%3A%201em%3B%0Aborder%2Dleft%3A%200%2E5em%20%23EEE%20solid%3B%0A%7D%0Ahr%20%7B%0Aheight%3A%200px%3B%0Aborder%2Dbottom%3A%20none%3B%0Aborder%2Dtop%2Dwidth%3A%20thin%3B%0Aborder%2Dtop%2Dstyle%3A%20dotted%3B%0Aborder%2Dtop%2Dcolor%3A%20%23999999%3B%0A%7D%0Aspan%2Eheader%2Dsection%2Dnumber%20%7B%0Apadding%2Dright%3A%201em%3B%0A%7D%0Aspan%2Etoc%2Dsection%2Dnumber%3A%3Aafter%20%7B%0Acontent%3A%20%22%20%22%3B%0Awhite%2Dspace%3A%20pre%3B%0A%7D%0A%40media%20print%20%7B%0A%2A%20%7B%0Abackground%3A%20transparent%20%21important%3B%0Acolor%3A%20black%20%21important%3B%0Afilter%3Anone%20%21important%3B%0A%2Dms%2Dfilter%3A%20none%20%21important%3B%0A%7D%0Abody%20%7B%0Afont%2Dsize%3A12pt%3B%0Amax%2Dwidth%3A100%25%3B%0A%7D%0Aa%2C%20a%3Avisited%20%7B%0Atext%2Ddecoration%3A%20underline%3B%0A%7D%0Ahr%20%7B%0Avisibility%3A%20hidden%3B%0Apage%2Dbreak%2Dbefore%3A%20always%3B%0A%7D%0Apre%2C%20blockquote%20%7B%0Apadding%2Dright%3A%201em%3B%0Apage%2Dbreak%2Dinside%3A%20avoid%3B%0A%7D%0Atr%2C%20img%20%7B%0Apage%2Dbreak%2Dinside%3A%20avoid%3B%0A%7D%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%20%21important%3B%0A%7D%0A%40page%20%3Aleft%20%7B%0Amargin%3A%2015mm%2020mm%2015mm%2010mm%3B%0A%7D%0A%40page%20%3Aright%20%7B%0Amargin%3A%2015mm%2010mm%2015mm%2020mm%3B%0A%7D%0Ap%2C%20h2%2C%20h3%20%7B%0Aorphans%3A%203%3B%20widows%3A%203%3B%0A%7D%0Ah2%2C%20h3%20%7B%0Apage%2Dbreak%2Dafter%3A%20avoid%3B%0A%7D%0A%7D%0A" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+  var links = document.links;  
+  for (var i = 0, linksLength = links.length; i < linksLength; i++)
+    if(links[i].hostname != window.location.hostname)
+      links[i].target = '_blank';
+});
+</script>
+
+</head>
+
+<body>
+
+
+<div id="header">
+<h1 class="title"><center>
+<strong>MethPed</strong>
+</center>
+<center>
+A DNA Methylation Classifier Tool for the Identification of Pediatric Brain Tumor Subtypes
+</center></h1>
+<h4 class="author"><em><center>
+<em>Mohammad Tanvir Ahamed, Anna Danielsson, Szilárd Nemes and Helena Carén</em>
+</center>
+<center>
+University of Gothenburg, Sweden
+</center></em></h4>
+<h4 class="date"><em><center>
+Date: <em>2016-02-22</em>
+</center>
+<center>
+<strong><em>Version: 1.0.0</em></strong>
+</center></em></h4>
+</div>
+
+<h1>Contents</h1>
+<div id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a></li>
+<li><a href="#necessary-packages-and-installation-guide"><span class="toc-section-number">2</span> Necessary packages and installation guide</a></li>
+<li><a href="#input-data-type-and-format-for-the-methped-classifier"><span class="toc-section-number">3</span> Input data type and format for the <strong>MethPed</strong> classifier</a><ul>
+<li><a href="#input-data-type"><span class="toc-section-number">3.1</span> Input data type</a></li>
+<li><a href="#input-data-format"><span class="toc-section-number">3.2</span> Input data format</a><ul>
+<li><a href="#expressionset-class"><span class="toc-section-number">3.2.1</span> <em>ExpressionSet</em> class</a></li>
+<li><a href="#matrix-class"><span class="toc-section-number">3.2.2</span> <em>matrix</em> class</a></li>
+<li><a href="#data.frame-class"><span class="toc-section-number">3.2.3</span> <em>data.frame</em> class</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#workflow-of-methped-classifier"><span class="toc-section-number">4</span> Workflow of <strong>MethPed</strong> classifier</a></li>
+<li><a href="#a-working-example-of-methped"><span class="toc-section-number">5</span> A working example of <strong>MethPed</strong></a><ul>
+<li><a href="#dataset-without-missing-probe-values"><span class="toc-section-number">5.1</span> Dataset without missing probe values</a><ul>
+<li><a href="#check-missing-value-in-data"><span class="toc-section-number">5.1.1</span> Check missing value in data</a></li>
+<li><a href="#apply-the-methped-classifier"><span class="toc-section-number">5.1.2</span> Apply the <strong>MethPed</strong> classifier</a></li>
+<li><a href="#output-summary"><span class="toc-section-number">5.1.3</span> Output summary</a></li>
+<li><a href="#output-visualization"><span class="toc-section-number">5.1.4</span> Output visualization</a></li>
+<li><a href="#count-missing-probes"><span class="toc-section-number">5.1.5</span> Count missing probes</a></li>
+</ul></li>
+<li><a href="#dataset-with-missing-probe-values"><span class="toc-section-number">5.2</span> Dataset with missing probe values</a><ul>
+<li><a href="#missing-beta-value-in-the-data-set"><span class="toc-section-number">5.2.1</span> Missing beta value in the data set</a></li>
+<li><a href="#missing-values-imputation"><span class="toc-section-number">5.2.2</span> Missing values imputation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#contact-and-citation"><span class="toc-section-number">6</span> Contact and Citation</a><ul>
+<li><a href="#contact"><span class="toc-section-number">6.1</span> Contact</a></li>
+<li><a href="#citation"><span class="toc-section-number">6.2</span> Citation</a></li>
+</ul></li>
+<li><a href="#authors-information"><span class="toc-section-number">7</span> Authors information</a></li>
+<li><a href="#session-info"><span class="toc-section-number">8</span> Session info</a></li>
+<li><a href="#references"><span class="toc-section-number">9</span> References</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>The <strong>MethPed</strong> classifier of pediatric brain tumors presented in the MethPed article [1] can be accessed through the <strong>MethPed</strong> package. This package includes the probes that were used for building the classification algorithm, the MethPed classifier and a published data set that we have used as an example.</p>
+</div>
+<div id="necessary-packages-and-installation-guide" class="section level1">
+<h1><span class="header-section-number">2</span> Necessary packages and installation guide</h1>
+<p>The <strong>MethPed</strong> package can be installed through Bioconductor</p>
+<pre class="r"><code>source(&quot;http://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;MethPed&quot;)</code></pre>
+<p>The <strong>MethPed</strong> classifier depends on the <strong>randomForest</strong> package for random forest algorithm. If necessary this can be installed from CRAN.</p>
+<pre class="r"><code>install.packages(&quot;randomForest&quot;)</code></pre>
+<p>If there are missing values present in the data, the <strong>impute</strong> package can be installed for missing data imputation. This is however optional and the user can use any algorithm for missing value imputation.</p>
+<pre class="r"><code>source(&quot;http://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;impute&quot;)</code></pre>
+</div>
+<div id="input-data-type-and-format-for-the-methped-classifier" class="section level1">
+<h1><span class="header-section-number">3</span> Input data type and format for the <strong>MethPed</strong> classifier</h1>
+<div id="input-data-type" class="section level2">
+<h2><span class="header-section-number">3.1</span> Input data type</h2>
+<p>Data for running MethPed is generated by the Illumina Infinium HumanMethylation 450 BeadChip arrays. MethPed assumes that the input data are beta values (<span class="math inline">\(\beta\)</span>). Beta values (<span class="math inline">\(\beta\)</span>) are the estimate of methylation level using the ratio of intensities between methylated and unmethylated alleles.</p>
+<p><span class="math display">\[\beta~=~\frac{Methylated~allele~intensity~(M)}{(Unmethylated~allele~intensity~(U)~+~Methylated~allele~intensity~(M)~+~offset)}\]</span></p>
+<p>The “offset” is chosen to avoid dividing with small values. Illumina uses a default of 100. <span class="math inline">\(\beta\)</span> are between 0 and 1 with 0 being unmethylated and 1 fully methylated.</p>
+</div>
+<div id="input-data-format" class="section level2">
+<h2><span class="header-section-number">3.2</span> Input data format</h2>
+<p><strong>MethPed</strong> assumes that the input data are in 3 specific data classes 1) <em>ExpressionSet</em> class, 2) <em>matrix</em> class and 3) <em>data.frame</em> class.</p>
+<div id="expressionset-class" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> <em>ExpressionSet</em> class</h3>
+<p>The <a href="https://www.bioconductor.org/packages/3.3/bioc/vignettes/Biobase/inst/doc/ExpressionSetIntroduction.pdf"><em>ExpressionSet</em></a> class is designed to combine several different sources of information into a single convenient structure. This type of class can be manipulated (e.g., subsetted, copied) conveniently, and is the input or output from many Bioconductor functions. Input data in <em>ExpressionSet</em> class is as</p>
+<pre class="r"><code>## Data Structure</code></pre>
+<pre><code>## ExpressionSet (storageMode: lockedEnvironment)
+## assayData: 1 features, 2 samples 
+##   element names: exprs 
+## protocolData: none
+## phenoData
+##   sampleNames: Tumor.A Tumor.B
+##   varLabels: Patient_ID
+##   varMetadata: labelDescription
+## featureData: none
+## experimentData: use 'experimentData(object)'
+## Annotation: IlluminaHumanMethylation450k</code></pre>
+<pre class="r"><code>## Data class</code></pre>
+<pre><code>## [1] &quot;ExpressionSet&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;Biobase&quot;</code></pre>
+</div>
+<div id="matrix-class" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> <em>matrix</em> class</h3>
+<p>In the <em>matrix</em> class formatted data, all the values of the matrix are beta values (<span class="math inline">\(\beta\)</span>). In the matrix, the probes are found in the rows and the samples in the columns. Input data in “<em>matrix</em>” class is as</p>
+<pre class="r"><code>## Data Structure</code></pre>
+<pre><code>##               Tumor.A    Tumor.B
+## cg00000957 0.63605834 0.84604594
+## cg00001349 0.79438393 0.59826915
+## cg00001583 0.02574772 0.06137504
+## cg00002028 0.03303346 0.03328133
+## cg00002719 0.01361386 0.01655172
+## cg00002837 0.47871573 0.54919749</code></pre>
+<pre class="r"><code>## Data class</code></pre>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+</div>
+<div id="data.frame-class" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> <em>data.frame</em> class</h3>
+<p>In the <em>data.frame</em> class formatted data, one column of the dataset are the probes and there is no order specificity of this column. This column can be anywhere in the dataset. The rest of the columns will be the beta values (<span class="math inline">\(\beta\)</span>) and each column represents an individual sample. The header of the data frame is the name of the corresponding column (Probe column name i.e. “TargetID” and sample column name i.e. “Tumor.A”, “Tumor.B”). Input data in <em>data.frame</em> class is as</p>
+<pre class="r"><code>## Data Structure</code></pre>
+<pre><code>##      Tumor.A    Tumor.B   TargetID
+## 1 0.63605834 0.84604594 cg00000957
+## 2 0.79438393 0.59826915 cg00001349
+## 3 0.02574772 0.06137504 cg00001583
+## 4 0.03303346 0.03328133 cg00002028
+## 5 0.01361386 0.01655172 cg00002719
+## 6 0.47871573 0.54919749 cg00002837</code></pre>
+<pre class="r"><code>## Data class</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+</div>
+</div>
+</div>
+<div id="workflow-of-methped-classifier" class="section level1">
+<h1><span class="header-section-number">4</span> Workflow of <strong>MethPed</strong> classifier</h1>
+<p>The <strong>MethPed</strong> classifier uses the <em>Random Forest (RF) algorithm</em> to classify unknown pediatric brain tumor samples into sub-types. The classification proceeds with the selection of the beta values (<span class="math inline">\(\beta\)</span>) needed for the classification.</p>
+<p>The computational process proceeded in two stages. The first stage commences with a reduction of the probe pool or building the training probe dataset for classification. We have named this dataset as <strong>“predictors”</strong>. The second stage is to apply the RF algorithm to classify the probe data of interest based on the training probe dataset (predictors).</p>
+<p>For the construction of the training probe pool (predictors), methylation data generated by the Illumina Infinium HumanMethylation 450 BeadChip arrays were downloaded from the Gene Expression Omnibus (<a href="http://www.ncbi.nlm.nih.gov/geo/">GEO</a>). Four hundred seventy-two cases were available, representing several brain tumor diagnoses (DIPG, glioblastoma, ETMR, medulloblastoma, ependymoma, pilocytic astrocytoma) and their further subgroups. Corresponding GEO accession number are given in the following table</p>
+<table>
+<caption><strong><em>Datasets used to build the MethPed classifier</em></strong></caption>
+<thead>
+<tr class="header">
+<th align="left">Diagnosis</th>
+<th align="left">GEO accession</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">DIPG</td>
+<td align="left">GSE50022</td>
+</tr>
+<tr class="even">
+<td align="left">Glioblastoma</td>
+<td align="left">GSE55712, GSE36278</td>
+</tr>
+<tr class="odd">
+<td align="left">ETMR</td>
+<td align="left">GSE52556</td>
+</tr>
+<tr class="even">
+<td align="left">Medulloblastoma</td>
+<td align="left">GSE54880</td>
+</tr>
+<tr class="odd">
+<td align="left">Ependymoma</td>
+<td align="left">GSE45353</td>
+</tr>
+<tr class="even">
+<td align="left">Pilocytic astrocytoma</td>
+<td align="left">GSE44684</td>
+</tr>
+</tbody>
+</table>
+<p>The data sets were merged and probes that did not appear in all data sets were filtered away. In addition, about 190,000 CpGs were removed due to SNPs, repeats and multiple mapping sites. The final data set contained 206,823 unique probes and nine tumor classes including the medulloblastoma subgroups. K–neighbor imputation was used for missing probe data.</p>
+<p>After that, a large number of regression analyses were performed to select the 100 probes per tumor class that had the highest predictive power (AUC values). Based on the identified 900 methylation sites, the nine pediatric brain tumor types could be accurately classified using the multiclass classification algorithm <strong>MethPed</strong> [1]. The complete list of 900 probes can be observed as</p>
+<pre class="r"><code># List of 900 probes in predictors
+library(MethPed)
+data(MethPed_900probes)
+head(MethPed_900probes)</code></pre>
+<pre><code>##     TargetID
+## 1 cg00001930
+## 2 cg00013409
+## 3 cg00015639
+## 4 cg00036119
+## 5 cg00061695
+## 6 cg00085790</code></pre>
+</div>
+<div id="a-working-example-of-methped" class="section level1">
+<h1><span class="header-section-number">5</span> A working example of <strong>MethPed</strong></h1>
+<div id="dataset-without-missing-probe-values" class="section level2">
+<h2><span class="header-section-number">5.1</span> Dataset without missing probe values</h2>
+<p>An example dataset without missing probe beta values (<span class="math inline">\(\beta\)</span>), is provided with the <strong>MethPed</strong> package in <em>ExpressionSet</em> class. This dataset consists of 2 patients and 468,821 probes. At first we can take a look at the data:</p>
+<pre class="r"><code># Loading package
+library(MethPed)
+# Loading data set
+data(MethPed_sample)
+head(MethPed_sample)</code></pre>
+<pre><code>## ExpressionSet (storageMode: lockedEnvironment)
+## assayData: 1 features, 2 samples 
+##   element names: exprs 
+## protocolData: none
+## phenoData
+##   sampleNames: Tumor.A Tumor.B
+##   varLabels: Patient_ID
+##   varMetadata: labelDescription
+## featureData: none
+## experimentData: use 'experimentData(object)'
+## Annotation: IlluminaHumanMethylation450k</code></pre>
+<pre class="r"><code>class(MethPed_sample)</code></pre>
+<pre><code>## [1] &quot;ExpressionSet&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;Biobase&quot;</code></pre>
+<div id="check-missing-value-in-data" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Check missing value in data</h3>
+<p>Additionally, it is good to check if there are missing probe values. This will identify if any values are missing from each column/sample in the probe data set. For this operation we can use the <code>checkNA</code> command form the <strong>MethPed</strong> package. Running this function might require some time for large data sets.</p>
+<pre class="r"><code>## Check for missing value 
+missingIndex &lt;- checkNA(MethPed_sample)
+missingIndex</code></pre>
+<pre><code>##   Tumor.A   Tumor.B probeName 
+##         0         0         0</code></pre>
+<p>In this example, there are no missing values (probe names or beta values) in the data set. Now we are set to run the MethPed algorithm.</p>
+</div>
+<div id="apply-the-methped-classifier" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Apply the <strong>MethPed</strong> classifier</h3>
+<p>The function <code>MethPed</code> has the argument <code>prob</code> which can take two values <em>TRUE</em> or <em>FALSE</em>. The value <em>TRUE</em> will return the conditional probability of a sample belonging to a specific group. <em>FALSE</em> will return the binary classification (0 or 1) of a sample belonging to a specific group (based on maximum conditional probability). By default <code>MethPed</code> will consider <em>TRUE</em> for <code>prob</code> argument.</p>
+<p>During running the <strong>MethPed</strong> algorithm, additional information on data and progress of data analysis are seen. The analysis will take longer time depending on the amount of data.</p>
+<pre class="r"><code># Run the MethPed classifier
+myClassification &lt;- MethPed(MethPed_sample)</code></pre>
+<pre><code>## 
+## Probe's column name in data                 : TargetID</code></pre>
+<pre><code>## Probe name integrity of data with predictor : OK</code></pre>
+<pre><code>## Missing value in data                       : No missing data point</code></pre>
+<pre><code>## Data summary                                : 468821 Probes and 2 Sample</code></pre>
+<pre><code>## 
+## Initiating  data analysis......</code></pre>
+<pre><code>## Classification is being processed on 1000 tree</code></pre>
+<pre><code>## ntree      OOB      1      2      3      4      5      6      7      8      9
+##   100:   2.84% 10.71%  4.17%  0.00%  2.25% 10.81%  1.80%  0.00%  0.00%  1.72%
+##   200:   2.66% 10.71%  4.17%  0.00%  2.25%  8.11%  1.80%  0.00%  0.00%  1.72%
+##   300:   2.49% 10.71%  4.17%  0.00%  1.69%  8.11%  1.80%  0.00%  0.00%  1.72%
+##   400:   2.31% 10.71%  4.17%  0.00%  2.25%  8.11%  0.00%  0.00%  0.00%  1.72%
+##   500:   2.31% 10.71%  4.17%  0.00%  2.25%  8.11%  0.00%  0.00%  0.00%  1.72%
+##   600:   2.13% 10.71%  2.08%  0.00%  2.25%  8.11%  0.00%  0.00%  0.00%  1.72%
+##   700:   2.31% 10.71%  2.08%  0.00%  2.25%  8.11%  0.90%  0.00%  0.00%  1.72%
+##   800:   1.95% 10.71%  2.08%  0.00%  1.69%  8.11%  0.00%  0.00%  0.00%  1.72%
+##   900:   2.13% 10.71%  2.08%  0.00%  1.69%  8.11%  0.90%  0.00%  0.00%  1.72%
+##  1000:   1.95% 10.71%  2.08%  0.00%  1.69%  8.11%  0.00%  0.00%  0.00%  1.72%</code></pre>
+<pre><code>## 
+## Missing probes: 1 out of 900 probes are missing</code></pre>
+<pre><code>## Finished analysis data</code></pre>
+<ul>
+<li>First message will show the name of the probe column in the data (Default: “TargetID”).</li>
+<li>Second message will show “OK” if at least one probe is common between input dataset and predictors (900 probes are used in the predictor [1]. See <a href="#womc">Workflow of MethPed classifier</a> section for details).</li>
+<li>Third message will report about missing value in the data.</li>
+<li>Fourth message will list how many probes and samples are in the input data.</li>
+<li>Fifth will show the progress of RF analysis.</li>
+<li>Sixth will show how many probes are missing in the input data compared with the 900 probes in predictors.</li>
+</ul>
+<p>The output of the algorithm is partitioned in 6 parts. The full output can be seen by typing <em>myClassification</em> (Variable name defined by user)</p>
+<pre class="r"><code>myClassification</code></pre>
+<pre><code>## $target_id
+## [1] &quot;TargetID&quot;
+## 
+## $probes
+## [1] 468821
+## 
+## $sample
+## [1] 2
+## 
+## $probes_missing
+## [1] &quot;cg14310162&quot;
+## 
+## $oob_err.rate
+##      OOB 
+## 1.953819 
+## 
+## $predictions
+##          DIPG Ependymoma  ETMR   GBM MB_Gr3 MB_Gr4 MB_SHH MB_WNT PiloAstro
+## Tumor.A 0.002      0.067 0.008 0.036  0.796  0.057  0.012  0.017     0.005
+## Tumor.B 0.008      0.038 0.000 0.181  0.001  0.000  0.001  0.000     0.771
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;methped&quot;</code></pre>
+<p>The first part contains the name of the probe column, the second part contains the number of probes and the third part the total number of samples in the main data. Each information can be extracted as</p>
+<pre class="r"><code># First part
+myClassification$target_id</code></pre>
+<pre><code>## [1] &quot;TargetID&quot;</code></pre>
+<pre class="r"><code># Second part
+myClassification$probes</code></pre>
+<pre><code>## [1] 468821</code></pre>
+<pre class="r"><code># Third part
+myClassification$sample</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>The fourth part contains the names of the probes that were included in the original classifier but are missing from the data at hand (input). This can be accessed through the command:</p>
+<pre class="r"><code># Fourth part
+myClassification$probes_missing</code></pre>
+<pre><code>## [1] &quot;cg14310162&quot;</code></pre>
+<p>In the example, one probe that was included in the original MethPed classifier, is missing from the present data set. If a large number of probes are missing, this could potentially lead to a drop in the predictive accuracy of the model. However, as can be seen by the fifth part of the result:</p>
+<pre class="r"><code># Fifth part
+myClassification$oob_err.rate</code></pre>
+<pre><code>##      OOB 
+## 1.953819</code></pre>
+<p>the out-of-bag error is 1.95%; only slightly higher than the 1.7% in the original MethPed classifier. For details see the MethPed article [1].</p>
+<p>The last output contains the predictions. We chose not to assign tumors to one or another group but to give probabilities of belonging to each group.</p>
+<pre class="r"><code># Sixth part
+myClassification$predictions</code></pre>
+<pre><code>##          DIPG Ependymoma  ETMR   GBM MB_Gr3 MB_Gr4 MB_SHH MB_WNT PiloAstro
+## Tumor.A 0.002      0.067 0.008 0.036  0.796  0.057  0.012  0.017     0.005
+## Tumor.B 0.008      0.038 0.000 0.181  0.001  0.000  0.001  0.000     0.771</code></pre>
+<p>In the example Tumor.A preserves the highest prediction probability, which is 0.796 for subtype MB_Gr3. This should be interpreted as a conditional probability. The probability that Tumor.A belongs to the subtype MB_Gr3 for the given data is 0.796. Similarly, Tumor.B preserves the highest prediction probability, which is 0.771 for the subtype PiloAstro.</p>
+</div>
+<div id="output-summary" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Output summary</h3>
+<p>Alternatively, the <code>summary</code> function can be used to get the result from the <code>MethPed</code> output.</p>
+<pre class="r"><code>summary(myClassification)</code></pre>
+<pre><code>##          DIPG Ependymoma  ETMR   GBM MB_Gr3 MB_Gr4 MB_SHH MB_WNT PiloAstro
+## Tumor.A 0.002      0.067 0.008 0.036  0.796  0.057  0.012  0.017     0.005
+## Tumor.B 0.008      0.038 0.000 0.181  0.001  0.000  0.001  0.000     0.771</code></pre>
+<p>If only the maximum conditional probability of samples is preferred, this can be obtained by supplying the FALSE value to the argument <code>prob</code>.</p>
+<pre class="r"><code>myClassification_max &lt;- MethPed(MethPed_sample,prob=FALSE)
+summary(myClassification_max)</code></pre>
+<pre><code>##         DIPG Ependymoma ETMR GBM MB_Gr3 MB_Gr4 MB_SHH MB_WNT PiloAstro
+## Tumor.A    0          0    0   0  0.796      0      0      0     0.000
+## Tumor.B    0          0    0   0  0.000      0      0      0     0.771</code></pre>
+</div>
+<div id="output-visualization" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Output visualization</h3>
+<p>The output of the classification can also be visualized in a bar plot</p>
+<pre class="r"><code>par(mai = c(1, 1, 1, 2), xpd=TRUE)
+mat&lt;-t(myClassification$predictions)
+mycols &lt;- c(&quot;green&quot;,rainbow(nrow(mat),start=0,end=1)[nrow(mat):1],&quot;red&quot;)
+barplot(mat,  col = mycols,
+                beside=FALSE,axisnames=TRUE,
+                ylim=c(0,1),xlab= &quot;Sample&quot;,ylab=&quot;Probability&quot;)
+legend( ncol(mat)+0.5,1,
+          legend = rownames(mat),fill = mycols,xpd=TRUE, cex = 0.6)</code></pre>
+<p><img src="data:image/png;base64,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" alt /></p>
+<p>or the <code>plot</code> command to used to get the same bar plot</p>
+<pre class="r"><code>myClassification &lt;- MethPed(MethPed_sample,prob=TRUE)
+plot(myClassification)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAAApVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAQP8AZmYAZpAAZrYA/wAA/0AA//86AAA6ADo6AGY6OgA6Ojo6OpA6kNtmAABmADpmAGZmOgBmZgBmZjpmZmZmkJBmtrZmtv+AAP+A/wCQOgCQOjqQZgCQkGaQtpCQ27aQ2/+2ZgC225C2/9u2///bkDrb/7bb/9vb////AAD/AL//tmb/vwD/25D//7b//9v///9JIXqNAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAV5UlEQVR4nO2dC3vjuHlGNZM6rZJ40lR203RXidrdmpvldhJFl///00IAvAAakxQJgnwtnvMktiwz8wnhMYjbB2yuAMJslv4AAF0gKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNAgK0iAoSIOgIA2CgjQICtJECno5bCyff57m4wCExAmab3buxbF6ATApUYJeDrWW+dPX+A8DcEuUoOeXffXyyEMeUkANCtLEtkHLKpQ2KKQhshd/fnG9eOpPSAPjoCANgoI0Uwma04uHFCSqQTcNbe+LMqBkoqS5o0uRvDgPJ+g/xEHQmACbv4iDoGIgaAiCioGgIQgqRuRcfNN2a+vFI+jMIKjH5dA7ukQnaWYQ1Ody2A4KsPmtOAgqRmxxjpt99wUIOjMIGhNg6Qd4P73lWVrAPhA0JsDmd+IgqBgIGoKgYiBoCIKKgaAhCCoGgoY8uKAd3cHMvWsGZY6f3qof3SiinZFZJmsCQUMeXdDf1HwjqBXw9LwtBbU/nl/MN5t6dsekTAoQNGTtglo5G0Hty9OzHevun5RJAYKGrF5Qo6EnqJGzfHnNe+ZkkoCgIasX1HwPa1Bv94MFQNAQBM0//+y3Qbf+/jELgKAhCFoJ6nrxu2qDI/PzEr0kBA1B0PARfzWCVlsYIujyrF7Qm06S9xsEVWD1gt4MMxnKYSYEVeDRBe2YSSoH6nfXW0HLfYqzDeOgy/PggnZwO9Xpz2zaqc5l9o5hwfINveVZWsA+WCwSE2Dza3EQVAwEDUFQMRA0BEHFQNAQBBUDQUMQVAwEDUFQMRA05MEF7RhQK8dB78jsMMOks4GgIY8u6N9q2haL9IOgC4Kg/SDogiDo9Xr68uPzxp3Mlm/KJaHfv7hZ0OKNTz98esvMtHy+PT2b93en53KK1F19865pO4xf8oygIQhqBCuEsrvC5TZlblcIWrwwP2Sffy5+8+nNLGy6HPanZ/O+maXP7S/2dgl++K5xOR9f5yJoyIoFLTtJO7eiyZy+6pYqFzLaF6fnvVt4l316M6vsT1/e7JXll73LXSqe/8G759e3ZsHeCBA0ZMWCejVouaTJNTaNZSbro/jiVoTaxU5bY7C9svri/mfVi+aLffQj6EQgqGmDGi+NoGWlWgua14IWqma76zuCFleFghat1s8/UYNOBYL6glZNx29r0PPr/72+vSfobQ3q16RjQNAQBC2bj+bnOuG4EtSJZro8l8MfiusDFb02qPeudbp3H+6OTzz2fzguAIImJy7lw2B74XUvvuoTWUtz+xvzbu4GlPyHedOLv6lBzy+b0Xs/IGjIgwvaQdWLNzXgd+UQph0HLarAWtBqHLRsB9x0h+px0Js26Ke3bPQ4E4KGrFfQhrtajKf/mGc3RgQNQdA7Bc1n2rApsjjFc2F7OXTNZSHozMwi6Ol5ru1s44qTFx/TpkvX26P0BEDQ5LAetMEOLLjBsrztLwpBZwZBG2y/rhy8vfMw2aUF7ANBxaAGDUFQMSZqg7bvwougMzN2oF4UevEhjy7o32tac5J+eSlfff7roZwBOm6evtrbvNmMnxMaB+OgISsW1G+kufUihZPuzcwKaje3i5hWHwWChiCopRL0X81y4+v5P/+rFnTuw2imEjSnFy/CpIJuM7tC6el/a0EHJNdNQqIatK0tjqDJmVbQo3k322Ufvga9MwCCJie2k2Q7QbWgp9//fD2/vjWC5rRBF2XFgr5bg14O++IJ/zVrevEzH5oUKWj1qdu3h0bQmZlW0Gu+LZ7w16oGtWfNzkrkQH01KnZsHR5D0JmZWNDT7//6P2+1oB03OhHxU50OpjpViE/5uPqCXg7fFc3Qpg06fm38OOIXizhYLKLC6JSP9wV1U9mNoO4E+fmgBg1ZsaB1TtI1ENROHTWCNs26eYhtg5ZVKG1QGT7IIpB7iSzO+aVv11MEnRkEjQmAoMlB0JgACJocBI0JgKDJQdCYAAiaHASNCYCgyUHQmAAImpzxOUl2SMaOx2T1iOjFz/oYct+nAkFDHl3QP9d8c50d1L4czJSgm1Vy2yx6WR/D7vw0IGjIegUtN7xx05tWRrNdTJD1MezOTwOChqxX0GouPt83gu7DrI9BN34iEDRktYIGOxuUj/jtTdbH/Xd9OhA0ZLWCeivT6oUjhZJB1seA2z4ZCBqyckEzlx3hZDxutmHWx+CbPwEIGrJiQavkiFpQc65ckPUx6MZPBIKGrFbQWkBP0NwJWmd9DLrxE4GgIY8uaPtAfbWvsl+DumXKddbHoBs/EQga8uCCduGWylcZHle3lj7I+hj7L8eAoCErFtRNddrcMn+q08v6GP0vR4CgIWsWVBIEDUFQMRA0BEHFQNAQBBUDQUMQVAwEDUFQMRA0BEHFQNCQBxe0fSYpzO1oBkJ9mpwQR/7tJZODoCGPLmhrScPcjibnw8PLCXE/F6+OqQ1F0JAVC+rndjQ5Hw1+Tsi1+m3yLesRNGTFgvq5HU3OR4OXE3J+/aHcVBtBZ2bNgnq5HU3Oh3dBU502m4TmPOLnZc2CerkdTc5HjV+dVs/+Y/qTERE0ZM2CerkdTc5HjZ8T0sh6OSRe5ISgIWsW1MvtaHI+6gv8nBB/7/fEz3gEDVm1oE1uR5Pz0Vzh5YR4glYL8VOBoCGPLmjHQL2f29HkfDRXeDkhVlD3c+vpGROBoCEPLmg7YW5Hk/Ph0eSElO1RmzefuJeEoCHrFrTO7eiY6jQ1ZvmIz2Y4GRFBQ1YrqCoIGoKgYkQWx4xDnJ67FrUg6MxMK6i5ue8+7ueivThFg6N3mtX6aQ4lC2dt2wMgaHJWVIPmm56ZLDt2m7lz7jkKUYQVCXrtc9TtcGp/z2GyKqxLUKdo61isqT1zalApViXo0Q50tS8IOL+Y/c92XTOyCDozM6Z8XGfYEKejOObjuPAd01lHV9j27hSCzky3oL+riU/5uM5xOE1XL36SkQUEnZnRgg5N+bAXLCnoq/MzcjUAgs7MaEFHpHzk6c/+6Bc0v0vQ1qsQdGbGCzo45eP0Jf3RCm3FyZrG9JjlKm1tcQRNznhBh6Z8GGUX7CRVNeikARA0OeMFHZrykTcLR9PBYpGQNQs6MOXDznGrC3o5uGdBezsVQWcmQtBhKR952YZbJOWj+HOxo7Ld8pVrrK/mYdDWUkXQmYkQdFjKx/WbK1IQVYN6HTumOlWIyEkamPJh0BbUzz5lmEmEGVM+ruqCUoMKso7FInUDtK8NWv4l0QaVYR2C3kslcntFj6Azs5qUjyQBEDQ51KAxARA0OesQ9M5x0MEBEDQ56xA0VQAETQ6CxgRA0OSkS/moh0GrNcvlefLly77/58bRVZx3UlBiAyBocroF/W3N4JQPN6+UFe+JCOo+UOwm5Ag6M6MF7Uv5cBsguDl7BUGraaLI0Ag6M6MF7Un58HKRNAStPh05SWEJlhawj/GCdqd8eMuXNQStQrfOso8JgKDJGS9od8qHm1WytVW1CnhjBN28d+l0dLZBbZVPGzQswdIC9jFe0O6Uj/KqjUYn6c7FIoMDIGhyxgvanfJRkZnNZBYXNFUABE1OhKCdKR/1gvpPbwi6HKsWtDPlo1LxKFODVo95HvFBCZYWsI9kKR9uHybTMxERtIhZNEpiD2pC0JlJl/JhayzznoagZhrBjIwxzBSWYGkB+1jNYhEzUG9Gxsx/JwuAoMlZjaBmqtNsf4OgYQmWFrCP9aR8mDGGbMcj/qY8SwvYx2pqULt8pWgXRx4WiqAzsyJBEwRA0OQgaEwABE3OigRlRf175VlawD5GDtSrwor6kEcX9C81Q3OSyiWiG7e38rY67SN7+mWa9N+2T9z6G1bUv1+epQXsY7yg3TlJbuFI9t/mN+eXXXG9nUPKqt3q75FhBKyoD1mxoD05SXbO+/z6o1Gx8PFy+JWVcjlBWVH/fnmWFrCP0YL25CRZW49P/3/Y29q0uN5mhCwnKCvq3y/P0gL2MV7Qnpyk8mBW8y2zmZ3W34UEZUV9a3mWFrCP8YL25CQdzdqlffXNrsCvVV6kBk0RAEGTM17QnpykQkK7NuPLm9HRLXDeIejMrFnQnpykwl/TCKi/bW0HeklB7UqW2FUsCDozEYJ2H0NTyOu6RbZ35PrQrsW6aCcpjzwHB0FnJiLlo/sYmuvx30wP/nr8lz/uK0FPX/59wWEmNwjGMFNYgqUF7CMm5aP7GJrTH6yGp2cv7SPbMFA/K+sWtDsn6XKwMrpvpaDNucfjwvZCDRqyWkFVmaQN2pX5iaAzsx5B+3vx9wznI+jMrCcn6Q7K87uoQYVYTQ3qnXPYjmsjI6gQqxE0WMrSjtmzHEGFWI2g944v5ZsdggqxGkHvPsjr9PwrBNVhbE5SuYBp656dt8/P7Oa04GPc/OL9TPH3djl0DEUh6Mx0C9p+XbVG2Q173wh6+vKnoJ66s/03AaxmClm7oNUC9RsD888/BU9JAUHzorof8CFyxkFFiBS06E/Uj/hj4YB9stvFolv3a+OF+fr0y+sPpvlXX5SGtuLkPZ3zvn+2pamDoMmJr0ErQc3M/Pll6950KZ5WieJ9d4nb0La6KA0txXGDoJHT8O8EQNDkxLZBt1UnyTlgH/nmdy5prnxQukt2lSixiWtdn/j9t10bI3Ih0zsBEDQ5owV1D7xd3Yt3D1Dz9fRsLDTL688vTom6FdBclIhIQatznNovRNCZiXzEX28ENT/kZWttX97w/a2gCftMcYLmVfP42NpORtCZmVjQ4mu99LNsaWZNM1W8BvWm61ubqwg6M6MH6m8FrZuXVQuz2gmn+F0tqHYb1KvZWy9F0JkZO7L9jaB1B736TdEUtSbajv6ucmSZXvx9GzdQgwoynaDlEGfz/C66ScdyaWi2efrFVU8LjYPeR73cnjaoDKtZLHIXVU3bPmCKoDODoDEBEDQ5CBoTAEGTg6AxARA0OQgaEwBBk4OgMQEQNDkIGhMAQZODoDEBEDQ5CBoTAEGTg6AxARA0OQgaEwBBk4OgMQEQNDkIGhMAQZODoDEBEDQ5CBoTAEGTg6AxARA0OQgaEwBBk4OgMQEQNDkIGhMAQZODoDEBEDQ5CBoTAEGTg6AxARA0OQgaEwBBk4OgMQEQNDkIGhMAQZODoDEBEDQ5CBoTAEGTg6AxARA0OQgaEwBBk4OgMQEQNDkIGhMAQZODoDEBEDQ5CBoTAEGTg6AxARA0OQgaEwBBk4OgMQEQNDkIGhMAQZODoDEBEDQ5CBoTAEGTg6A+uTtitHjBSXMiIKiHOb3RnYOHoCogaIM7CvFyePq6IkHlibmjekQVpzpMNnv6uh5B/ywOgjbUh8lmWwRVAUE9Ki3PL61nIiPozCCoT3Xc8eWAoCIgaEwABE0OgsYEQNDkIOi70ElSAUHv+mdbhuUQNDkIGhMAQZODoDEBEDQ5COpzObjneFsLFEFnB0E98k05lXSsXvQEQNDkIGhDPdVZqPr09Z4ACJocBG2oFosUHBlmEgFBG6hBBUFQj2oqnjaoDgjqc35xvfi2+hNBZwdBYwIgaHIQNCYAgiYHQWMCIGhyEDQmAIImB0FjAiBochA0JgCCJgdBYwIgaHIQNCYAgiYHQWMCIGhyEDQmAIImB0FjAiBochA0JgCCJgdBYwIgaHIQNCYAgiYHQWMCIGhyEDQmwNybuQ6ntzxLC9gHgsYE+Pi39+OX4GOBoCEIKgaChiCoGAgagqBiIGgIgoqBoCEIKgaChiCoGAgagqBiIGgIgorBTNINveVZWsA+EDQmwObv4iCoGAgagqBi8Ii/obc8SwvYB4LGBNj8TRwEFQNBQxBUDAQNQVAxEDQEQcVA0BAEFQNBQ/oFlSfZrVwEBA3pF3TpT9gHgsYE+Pi39+OX4GMRWZzBZ3Uuffv6QFAx4ooz/KzOpW9fHwgqRlRxRpw0t/Tt6wNBxYgqzoizOpe+fX0gqBjUoCEIKkZsG3ToWZ1L374+EFSMyOIMPqtz6dvXB4KKwThoCIKKgaAhTHWKMVVx8tX04n8jDoLe9c+2/EEvVq3czYCSiZLmji7FgxUHHg0EBWmSLxYBiCH5YhGAGJJPdQLEkHyxCEAM1KAgTfLFIgAxJF8sAhAD46AgDYKCNAgK0iAoSIOgIA2CgjQICtIgKEiDoCANgoI0CArSIChIg6AgDYKCNPKCVgv6BuXlZULLU4cXILOXf3pL+rE+CvKCGk5fht2s05c/aWWgDCtAZlfX5hhqeEhB888/Pe/7L5uPMYKeX3SeAgvygQS1KXrFl9Pz98VTc3d63tiEk2PxOCxu5fn1h+ohejlsi/8s+olvGFaASlCpv7Gl+JCCFg+/3NxMs2PZsbjJ55dt8d867eRofi/1gBxWgPIRL/UnthgfUtCivim/7F1iaaGk90Q0N1jrATmsABl5Xg0fUtC9vbX2i/1uXjRPRHvrr5lSN2lYAVwNetxQhV4fRdDi3eb+5uWwjlATblgBnKBaf2KL8RiC+hVQ2T8yzToZxtSg7XsCr4oPJeiuuaXVF68JV+0hUXaPlLpJgwpQ16A0Qq8fStDL4enr5bAJ76/XCS7vb3VfXVNUg0EFqNugQm2U5fhAgtpJw+9vnpDNMKK5v8Xj/VQP0Qu14YYUgKnOgA8hKKwXBAVpEBSkQVCQBkFBGgQFaRAUpEFQkAZBQRoEBWkQFKRBUJAGQUEaBAVpEBSkQVCQBkFBGgQFaRAUpEFQkAZBQRoEBWkQFKRBUJAGQUEaBAVpENRij+K4Y6sc9uWeGwQ1uI26sv7tkBB0bhDUkNm9RO84eQFB5wZBrzdmZm5z5uAojtOXH5+bLehytx0dzAGCGrz94E1lava+DY7iKDStNvLcl7/F0HlAUIupKG0f6fz65rbtDI7icD7mT1/tXvJ2S2SdzUcfGwStuByqPWOP9qn+7Ubybp9ut8V4s08uJAVBPcyezEUD0x6kGApqd0guBdU7ROSRQdBrUx0WBtZetgvK3txzgqDXphdfNCxt2/L47SPeng1WtkGpO2cEQQ1He+7gcbOzSp5fyheeoEW16ffi7xnUhylAUIud6rTO5eZ75j3rnaDfuaOJ63FQOvEzgaD3QJ99MRD0HhB0MRD0HhB0MRAUpEFQkAZBQRoEBWkQFKRBUJAGQUEaBAVpEBSkQVCQBkFBGgQFaRAUpEFQkAZBQRoEBWkQFKRBUJAGQUEaBAVp/gldx7BFjtwAVAAAAABJRU5ErkJggg==" alt /></p>
+<p>If only the maximum conditional probability of samples is preferred, this can be obtained by supplying the FALSE value to the argument <code>prob</code>.</p>
+<pre class="r"><code>myClassification_max &lt;- MethPed(MethPed_sample,prob=FALSE)
+plot(myClassification_max)</code></pre>
+<p><img src="data:image/png;base64,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" alt /></p>
+</div>
+<div id="count-missing-probes" class="section level3">
+<h3><span class="header-section-number">5.1.5</span> Count missing probes</h3>
+<p>The name of the probes that were included in the original <strong>MethPed</strong> classifier (900 probes) but are missing from the data at hand, can be accessed by the command <code>probeMis</code>.</p>
+<pre class="r"><code>probeMis(myClassification)</code></pre>
+<pre><code>## [1] &quot;cg14310162&quot;</code></pre>
+</div>
+</div>
+<div id="dataset-with-missing-probe-values" class="section level2">
+<h2><span class="header-section-number">5.2</span> Dataset with missing probe values</h2>
+<p>In the previous section <strong>MethPed</strong> classification on a dataset without missing values were shown. In this section, <strong>MethPed</strong> classification on dataset with missing values are shown.</p>
+<div id="missing-beta-value-in-the-data-set" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Missing beta value in the data set</h3>
+<p>The dataset “MethPed_sample” provided with the package is a non-missing valued dataset. As an example we will now generate a data set with missing probe values.</p>
+<pre class="r"><code># Loading dataset
+data(MethPed_sample)
+class(MethPed_sample)</code></pre>
+<pre><code>## [1] &quot;ExpressionSet&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;Biobase&quot;</code></pre>
+<p>As the provided dataset is in the <em>ExpressionSet</em> class, we have to extract the matrix of beta values for further process</p>
+<pre class="r"><code># Loading library
+library(Biobase)
+# exprs function is loaded from the package Biobase
+MethPed_sample_matrix&lt;-Biobase::exprs(MethPed_sample)
+head(MethPed_sample_matrix)</code></pre>
+<pre><code>##               Tumor.A    Tumor.B
+## cg00000957 0.63605834 0.84604594
+## cg00001349 0.79438393 0.59826915
+## cg00001583 0.02574772 0.06137504
+## cg00002028 0.03303346 0.03328133
+## cg00002719 0.01361386 0.01655172
+## cg00002837 0.47871573 0.54919749</code></pre>
+<pre class="r"><code>class(MethPed_sample_matrix)</code></pre>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<p>We can check for missing value in the extracted matrix of beta values</p>
+<pre class="r"><code>checkNA(MethPed_sample_matrix)</code></pre>
+<pre><code>##   Tumor.A   Tumor.B probeName 
+##         0         0         0</code></pre>
+<p>There are no missing values in the extracted matrix of beta values. Now we will remove some beta values (Replace with NA) from this matrix to make a missing valued dataset.</p>
+<pre class="r"><code>MethPed_sample_missing&lt;-MethPed_sample_matrix
+MethPed_sample_missing[c(1,10,200),2]&lt;-NA
+MethPed_sample_missing[c(4,600,500,1000),1]&lt;-NA
+head(MethPed_sample_missing,10)</code></pre>
+<pre><code>##               Tumor.A    Tumor.B
+## cg00000957 0.63605834         NA
+## cg00001349 0.79438393 0.59826915
+## cg00001583 0.02574772 0.06137504
+## cg00002028         NA 0.03328133
+## cg00002719 0.01361386 0.01655172
+## cg00002837 0.47871573 0.54919749
+## cg00003202 0.01878770 0.01040884
+## cg00003287 0.39978051 0.12231161
+## cg00004121 0.54321178 0.51326286
+## cg00007036 0.94417774         NA</code></pre>
+<p>This dataset is now ready for <strong>MethPed</strong> classification.</p>
+</div>
+<div id="missing-values-imputation" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Missing values imputation</h3>
+<p><strong>MethPed</strong> cannot be applied on data sets with missing value. Before applying the <strong>MethPed</strong> classifier, it’s important to check if there are missing values of probes in the dataset. To check missing values, one can use the ´checkNA´ function</p>
+<pre class="r"><code>checkNA(MethPed_sample_missing)</code></pre>
+<pre><code>##   Tumor.A   Tumor.B probeName 
+##         4         3         0</code></pre>
+<p>In this example there are 2 tumors with in total 7 missing beta values in the data. The classifier requires that all probes that were used for training the model are present for prediction. If this condition is not met, no prediction will be returned for the tumors with missing probes. One possible solution is to discard probes that have missing data. This might not be efficient if a large number of probe’s values are missing in one or more samples.</p>
+<p>A more feasible approach can be to impute the missing values. Here we illustrate imputation by the means of K-nearest neighbors. For technical details and relevant references we refer readers to the documentation of the <a href="https://bioconductor.org/packages/release/bioc/html/impute.html"><em>impute</em></a> package. It should be noted that, this package was developed for gene expression data, and not for methylation data. However, most likely the method performs well on methylation data as well [3].</p>
+<p>The <em>impute</em> package depends on a random value for initiation. Therefore, to assure randomness, the eventual set of random seeds should be removed.</p>
+<pre class="r"><code>if(exists(&quot;.Random.seed&quot;)) rm(.Random.seed)</code></pre>
+<p>As mentioned before, the dataset contains 2 tumors. So the imputation will be run on two column of the methylation data.</p>
+<pre class="r"><code># Loading library
+library(impute)
+# Apply imputation
+imputedData &lt;- impute.knn(MethPed_sample_missing)
+# extract the imputed matrix form object &quot;data&quot;
+imputedData &lt;- imputedData$data
+# Check for missing value
+checkNA(imputedData)</code></pre>
+<pre><code>##   Tumor.A   Tumor.B probeName 
+##         0         0         0</code></pre>
+<p>Now we are set to run the MethPed algorithm on the imputated matrix.</p>
+<pre class="r"><code>myClassification &lt;- MethPed(imputedData)
+summary(myClassification)</code></pre>
+<pre><code>##          DIPG Ependymoma  ETMR   GBM MB_Gr3 MB_Gr4 MB_SHH MB_WNT PiloAstro
+## Tumor.A 0.002      0.067 0.008 0.036  0.796  0.057  0.012  0.017     0.005
+## Tumor.B 0.008      0.038 0.000 0.181  0.001  0.000  0.001  0.000     0.771</code></pre>
+</div>
+</div>
+</div>
+<div id="contact-and-citation" class="section level1">
+<h1><span class="header-section-number">6</span> Contact and Citation</h1>
+<div id="contact" class="section level2">
+<h2><span class="header-section-number">6.1</span> Contact</h2>
+<p>For bug-reports, comments and feature requests please write to <a href="mailto:helenacarenlab+methped@gmail.com">helenacarenlab+methped@gmail.com</a>.</p>
+</div>
+<div id="citation" class="section level2">
+<h2><span class="header-section-number">6.2</span> Citation</h2>
+<p>When using MethPed in your work, please cite as:</p>
+<pre class="r"><code>citation('MethPed')</code></pre>
+<pre><code>## 
+## To cite package 'MethPed' in publications use:
+## 
+##   Mohammad Tanvir Ahamed, Anna Danielsson, Szilárd Nemes and
+##   Helena Carén (2016). MethPed: A DNA methylation classifier tool
+##   for the identification of pediatric brain tumor subtypes. R
+##   package version 0.99.4.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {MethPed: A DNA methylation classifier tool for the identification of pediatric
+## brain tumor subtypes},
+##     author = {Mohammad Tanvir Ahamed and Anna Danielsson and Szilárd Nemes and Helena Carén},
+##     year = {2016},
+##     note = {R package version 0.99.4},
+##   }</code></pre>
+</div>
+</div>
+<div id="authors-information" class="section level1">
+<h1><span class="header-section-number">7</span> Authors information</h1>
+<p>Mohammad Tanvir Ahamed, Anna Danielsson, Szilárd Nemes and Helena Carén, University of Gothenburg, Sweden.</p>
+</div>
+<div id="session-info" class="section level1">
+<h1><span class="header-section-number">8</span> Session info</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R Under development (unstable) (2016-01-25 r70000)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 7 x64 (build 7601) Service Pack 1
+## 
+## locale:
+## [1] LC_COLLATE=C                          
+## [2] LC_CTYPE=English_United States.1252   
+## [3] LC_MONETARY=English_United States.1252
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.1252    
+## 
+## attached base packages:
+## [1] parallel  stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+## [1] impute_1.45.0       BiocStyle_1.9.3     MethPed_0.99.4     
+## [4] Biobase_2.31.3      BiocGenerics_0.17.3
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.3         roxygen2_5.0.1      randomForest_4.6-12
+##  [4] digest_0.6.9        withr_1.0.1         formatR_1.2.1      
+##  [7] magrittr_1.5        evaluate_0.8        stringi_1.0-1      
+## [10] rmarkdown_0.9.2     devtools_1.10.0     tools_3.3.0        
+## [13] stringr_1.0.0       yaml_2.1.13         memoise_1.0.0      
+## [16] htmltools_0.3       knitr_1.12.3</code></pre>
+</div>
+<div id="references" class="section level1">
+<h1><span class="header-section-number">9</span> References</h1>
+<p>[1] Anna Danielsson, Szilárd Nemes, Magnus Tisell, Birgitta Lannering, Claes Nordborg, Magnus Sabel, and Helena Carén. “MethPed: A DNA Methylation Classifier Tool for the Identification of Pediatric Brain Tumor Subtypes”. Clinical Epigenetics 2015, 7:62, 2015</p>
+<p>[2] Breiman, Leo (2001). “Random Forests”. Machine Learning 45 (1): 5–32. <a href="doi:10.1023/A:1010933404324" class="uri">doi:10.1023/A:1010933404324</a></p>
+<p>[3] Troyanskaya, O., M. Cantor, G. Sherlock, P. Brown, T. Hastie, R. Tibshirani, D. Botstein, and R. B. Altman. “Missing Value Estimation Methods for DNA Microarrays.” Bioinformatics 17.6 (2001): 520-25.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+Package: MethPed
+Type: Package
+Version: 0.99.4
+Date: 2016-01-01
+Title: A DNA methylation classifier tool for the identification of pediatric
+    brain tumor subtypes
+Authors@R: c( person(given = "Mohammad Tanvir", family = "Ahamed", role = c("aut","trl")),
+              person(given = "Anna", family = "Danielsson", role = "aut"),
+              person(given = "Szilárd", family = "Nemes", role = c("aut","trl")),
+              person(given = "Helena", family = "Carén", role = c("aut","cre","cph"),email = "helenacarenlab@gmail.com"))
+Depends:
+    R (>= 3.0.0),
+    Biobase
+Suggests:
+    BiocStyle,
+    knitr,
+    markdown,
+    impute
+Imports:
+    randomForest,
+    grDevices,
+    graphics,
+    stats
+VignetteBuilder: knitr
+biocViews: DNAMethylation, Classification, Epigenetics
+Encoding: UTF-8
+Description: Classification of pediatric tumors into biologically defined subtypes is challenging and multifaceted approaches are needed. For this aim, we developed a diagnostic classifier based on DNA methylation profiles. We offer MethPed as an easy-to-use toolbox that allows researchers and clinical diagnosticians to test single samples as well as large cohorts for subclass prediction of pediatric brain tumors.  The current version of MethPed can classify the following tumor diagnoses/subgroups: Diffuse Intrinsic Pontine Glioma (DIPG), Ependymoma, Embryonal tumors with multilayered rosettes (ETMR), Glioblastoma (GBM), Medulloblastoma (MB) - Group 3 (MB_Gr3), Group 4 (MB_Gr3), Group WNT (MB_WNT), Group SHH (MB_SHH) and Pilocytic Astrocytoma (PiloAstro).
+License: GPL-2
+RoxygenNote: 5.0.1
